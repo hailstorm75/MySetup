@@ -1,0 +1,139 @@
+#!/bin/bash
+
+PROGNAME="newproj:"
+
+function getProjType()
+{
+  local __result=$1
+  local __input
+
+  echo $PROGNAME "Project types:"
+  echo "  1. cpp"
+  echo "  2. c"
+  echo "  3. tex"
+
+  echo -n $PROGNAME "Number: "
+  read __input
+
+  if ! [ $__input -eq $__input ] 2>/dev/null
+  then
+    echo $PROGNAME "Error: non-numeric values are illigal. Exiting..."
+    exit 2
+  else
+    if [ $__input -gt 3 -o $__input -lt 1 ]
+    then
+      echo $PROGNAME "Error: provided number out of available range. Exiting..."
+      exit 2
+    else
+      eval $__result="'$__input'"
+    fi
+  fi
+}
+
+function getProjName()
+{
+  local __result=$1
+  local __input
+
+  echo -n $PROGNAME "Project name: "
+
+  read __input
+
+  if [ $__input == `echo $__input | grep -E '^[a-zA-Z_][a-zA-Z_$0-9]*$'` ] 2>/dev/null
+  then
+    if [ -d $PWD/"$__input" ]
+    then
+      echo $PROGNAME "Error: a folder/project with this name already exists. Exiting..."
+      exit 1
+    else
+      eval $__result="'$__input'"
+    fi
+  else
+    echo $PROGNAME "Error: name begins with illegal character. Exiting..."
+    exit 2
+  fi
+}
+
+function generateFile()
+{
+  local TEMPLATES=($(ls ~/.templates | grep -E '*'$1'$'))
+  local TEMPLATECOUNT=0
+  local __input
+
+  echo $PROGNAME "Templates:"
+
+  for i in ${TEMPLATES[@]}:
+  do
+    ((TEMPLATECOUNT++))
+    echo "  $TEMPLATECOUNT. $i"
+  done
+
+  echo -n $PROGNAME "Select: "
+  read __input
+
+  if ! [ $__input -eq $__input ] 2>/dev/null
+  then
+    echo $PROGNAME "Error: non-numeric values are illegal. Exiting..."
+    exit 2
+  fi
+
+  local num=${#TEMPLATES[@]}
+  if [ $__input -gt $num -o $__input -lt 1 ]
+  then
+    echo $PROGNAME "Error: invalid template number. Exiting..."
+    exit 1
+  fi
+
+
+  mkdir $PWD/"$PROJNAME" 2>/dev/null
+  if [ $? -eq 0 ]
+  then
+    touch $PWD/"$PROJNAME"/"main.$2"
+    cat ~/.templates/${TEMPLATES[$SELECTED - 1]} > $PWD/"$PROJNAME"/main.$2
+  else
+    echo $PROGNAME "Error: failed to create directory, permission denied. Exiting..."
+    exit 2
+  fi
+}
+
+case "$#" in
+0)
+  getProjType PROJTYPE
+  getProjName PROJNAME
+  ;;
+1)
+  if [ $1 -eq $1 ] 2>/dev/null
+  then
+    PROJTYPE=$1
+    getProjName PROJNAME
+  else
+    if ! [ $1 == `echo $1 | grep -E '^[a-zA-Z_][a-zA-Z_$0-9]*$'` ] 2>/dev/null
+    then
+      echo $PROGNAME "Error: invalid argument. Exiting..."
+      exit 2
+    fi
+
+    PROJNAME=$1
+    getProjType PROJTYPE
+  fi
+  ;;
+*)
+  echo $PROGNAME "Error: invalid argument count. Exiting..."
+  exit 1
+  ;;
+esac
+
+case "$PROJTYPE" in
+1)
+  generateFile "Cpp" "cpp"
+  ;;
+2)
+  generateFile "C" "c"
+  ;;
+3)
+  generateFile "Tex" "tex"
+  ;;
+esac
+
+exit 0
+
