@@ -1,5 +1,5 @@
 # MySetup
-My bash on windows vim setup and a couple of scripts. If you are having problems installing this set-up feel free to contact me.
+My bash on windows vim setup and a couple of scripts. If you are having problems installing this setup feel free to contact me.
 
 # Installation
 This installation guide assumes your have minimal experience using VIM and the terminal.
