@@ -2,6 +2,8 @@
 My bash on windows vim setup and a couple of scripts. If you are having problems installing this set-up feel free to contact me.
 
 # Installation
+This installation guide assumes your have minimal experience using VIM and the terminal.
+## Settings and scripts
 Before installing please remove your current .vimrc. You can do this by applying the following command:
 ```bash
 rm ~/.vimrc
@@ -16,13 +18,19 @@ rm .git .gitattributes README.md
 cd
 rmdir MySetup
 ```
-Next you need to install the VIM plugins and additional packages which you can find in the [requirements](#Requirements) section.
 
+## Plugins
+Next you need to install the VIM plugins and additional packages which you can find in the [requirements](#requirements) section.
+
+> **Note**: if you are using a different package manager, then you'll have to remove the first line from the provided .vimrc file and use the appropriate plugin installation steps for your package maanger.
+
+### Installing Pathogen
 To install a vim plugin you will most likely need a package manager. I use [pathogen](https://github.com/tpope/vim-pathogen). To install pathogen paste the following command into your terminal:
 ```bash
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 ```
+### Installing Plugins using Pathogen
 After that everything else is simple. Just navigate to your pathogen bundle directory
 ```bash
 cd ~/.vim/bundle
@@ -31,7 +39,7 @@ and install the VIM plugins using this syntax
 ```bash
 git clone https://github.com/USER/PLUGIN
 ```
-
+## Packages
 The way you install packages will differ depending on your Linux distro. But since this is a setup for Bash on Windows (Ubuntu), I will provide the ubuntu command:
 ```bash
 sudo apt-get install MyPackageName
