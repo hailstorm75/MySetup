@@ -1,6 +1,22 @@
 # MySetup
 My bash on windows vim setup and a couple of scripts. If you are having problems installing this setup feel free to contact me.
 
+# Shortcuts
+## Global
+- **Ctrl+N** open/close NerdTree for file navigation
+- **Ctrl+M** open/close Tagbar for tag view (very useful for C and CPP)
+- **Ctrl+S** split screen
+- **Ctrl+B** compile file (executes .vimbuilder. Edit that file to configure more file types)
+## C and CPP
+- **F5** start debugging
+- **Ctrl+F5** stop debugging
+- **F6** continue until next breakpoint or program end
+- **F9** toggle breakpoint
+- **F10** step over line of code
+- **F11** step into function/method call
+- **F12** go to definition
+- **Ctrl+E** show value of variable under cursor
+
 # Installation
 This installation guide assumes your have minimal experience using VIM and the terminal.
 ## Settings and scripts
