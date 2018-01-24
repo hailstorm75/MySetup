@@ -45,6 +45,7 @@ sudo apt-get install MyPackageName
 
 # Requirements
 ## Vim plugins
+> **Note**: Some plugins may require additional settings. Most notably YouCompleteMe
 - https://github.com/scrooloose/nerdtree.git
 - https://github.com/jiangmiao/auto-pairs.git
 - https://github.com/yggdroot/indentline
