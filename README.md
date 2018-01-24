@@ -14,9 +14,8 @@ cd
 git clone https://github.com/hailstorm75/MySetup/
 cd MySetup
 mv -t ~/ .newProjectGenerator .vimbuilder .vimrc .templates
-rm .git .gitattributes README.md
 cd
-rmdir MySetup
+rm -rf MySetup
 ```
 
 ## Plugins
