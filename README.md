@@ -20,8 +20,7 @@ rm -rf MySetup
 
 ## Plugins
 Next you need to install the VIM plugins and additional packages which you can find in the [requirements](#requirements) section.
-
-> **Note**: if you are using a different package manager, then you'll have to remove the first line from the provided .vimrc file and use the appropriate plugin installation steps for your package maanger.
+> **Note**: if you are already using a package manager and it's not pathogen you'll have to remove the first line from the provided .vimrc file and use the appropriate plugin installation steps for your package maanger.
 
 ### Installing Pathogen
 To install a vim plugin you will most likely need a package manager. I use [pathogen](https://github.com/tpope/vim-pathogen). To install pathogen paste the following command into your terminal:
