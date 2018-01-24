@@ -34,6 +34,15 @@ cd
 rm -rf MySetup
 ```
 
+Add the following line to the end of your ~/.bashrc to map .newProjectGenerator to a short command:
+```bash
+alias newproj="~/.newProjectGenerator"
+```
+(Optional) Add the following line to the end of your ~/.bashrc to enable VIM mode for your bash terminal:
+```bash
+set -o vi
+```
+
 ## Plugins
 Next you need to install the VIM plugins and additional packages which you can find in the [requirements](#requirements) section.
 > **Note**: if you are already using a package manager and it's not pathogen you'll have to remove the first line from the provided .vimrc file and use the appropriate plugin installation steps for your package maanger.
