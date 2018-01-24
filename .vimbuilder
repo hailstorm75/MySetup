@@ -1,0 +1,22 @@
+#!/bin/bash
+echo vimbuilder: Getting filetype...
+EXT=$(basename "$1" | cut -d. -f2)
+
+case "$EXT" in
+"c" | "C")
+  echo vimbuilder: Compiling...
+  gcc "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
+  ;;
+"cpp" | "CPP")
+  echo vimbuilder: Compiling...
+  g++ "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
+  ;;
+"tex")
+  echo vimbuilder: Compiling...
+  pdflatex "$1" && echo vimbuilder: Done
+  ;;
+*)
+  echo vimbuilder: Error wrong filetype
+  exit 1
+  ;;
+esac
