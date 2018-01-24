@@ -13,7 +13,7 @@ To install this VIM setup please run the following commands in the exact order:
 cd
 git clone https://github.com/hailstorm75/MySetup/
 cd MySetup
-mv -t ~/ .newProjectGenerator .vimbuilder .vimrc .templates
+mv -t ~/ .newProjectGenerator .vimbuilder .vimrc .ycm_extra_conf .templates
 cd
 rm -rf MySetup
 ```
