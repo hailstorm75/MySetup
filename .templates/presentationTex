@@ -1,0 +1,18 @@
+\documentclass{beamer}
+
+\title{Title}
+\author{Denis Akopyan}
+
+\usetheme{Frankfurt}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+
+\frametitle{Slide title}
+
+\end{frame}
+
+\end{document}
