@@ -29,14 +29,15 @@ To install this VIM setup please run the following commands in the exact order:
 cd
 git clone https://github.com/hailstorm75/MySetup/
 cd MySetup
-mv -t ~/ .newProjectGenerator .vimbuilder .vimrc .ycm_extra_conf .templates
+mv -t ~/ .newProjectGenerator .newClassGenerator .vimbuilder .vimrc .ycm_extra_conf .templates
 cd
 rm -rf MySetup
 ```
 
-Add the following line to the end of your ~/.bashrc to map .newProjectGenerator to a short command:
+Add the following lines to the end of your ~/.bashrc to map Generators to a shorter command:
 ```bash
 alias newproj="~/.newProjectGenerator"
+alias newclass="~/.newClassGenerator"
 ```
 (Optional) Add the following line to the end of your ~/.bashrc to enable VIM mode for your bash terminal:
 ```bash
