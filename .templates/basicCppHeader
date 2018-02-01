@@ -1,0 +1,15 @@
+#pragma once
+
+class CLASSNAME
+{
+  public:
+    /**
+     * \brief Default constructor
+     */
+    CLASSNAME();
+
+    /**
+      * \brief Default destructor
+      */
+    ~CLASSNAME();
+};
