@@ -1,0 +1,65 @@
+#!/bin/bash
+
+PROGNAME="newclass:"
+
+function getClassName()
+{
+  local __result=$1
+  local __input
+
+  echo -n $PROGNAME "Class name: "
+  read __input
+
+    if [ $__input == `echo $__input | grep -E '^[a-zA-Z_][a-zA-Z_$0-9]*$'` ] 2>/dev/null
+  then
+    if [ -f $PWD/"$__input".cpp -o -f $PWD/"$__input".h ]
+    then
+      echo $PROGNAME "Error: a class/header with this name already exists. Exiting..."
+      exit 1
+    else
+      eval $__result="'$__input'"
+    fi
+  else
+    echo $PROGNAME "Error: name begins with illegal character. Exiting..."
+    exit 2
+  fi
+}
+
+function generateClass()
+{
+  echo $PROGNAME Generating class
+  touch $PWD/"$CLASSNAME".cpp
+  touch $PWD/"$CLASSNAME".h
+
+  cat ~/.templates/basicCppClass | sed "s@CLASSNAME@$CLASSNAME@g" > $PWD/"$CLASSNAME".cpp
+  cat ~/.templates/basicCppHeader | sed "s@CLASSNAME@$CLASSNAME@g" > $PWD/"$CLASSNAME".h
+}
+
+function updateCMakeLists()
+{
+  local __start=`cat CMakeLists.txt | grep -En "^add_executable\(" | cut -d: -f1`
+  local __end=`expr $(tail -n +$__start CMakeLists.txt | grep -En -m 1 ')' | cut -d: -f1) + $__start - 1`
+  echo $PROGNAME Updating CMakeLists.txt
+  sed -i "${__end}s@)@  $CLASSNAME.cpp\\n)@" CMakeLists.txt
+}
+
+if [ -f "CMakeLists.txt" ]
+then
+  while :
+  do
+    getClassName CLASSNAME
+    generateClass & updateCMakeLists
+
+    echo -n $PROGNAME Add another? '(y/n): '
+    read ANSWER
+
+    if [ ! $ANSWER == "y" ]
+    then
+      break
+    fi
+  done
+  cmake $PWD
+else
+  echo $PROGNAME "CMakeLists.txt is required to create a class. Exiting..."
+  exit 1
+fi
