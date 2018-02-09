@@ -57,14 +57,13 @@ hi cursorline ctermbg=235
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :TagbarToggle<CR>
 map <C-s> :sp<CR>
-map <C-b> :!sh ~/.vimbuilder '%:p'<CR><CR>
-autocmd FileType c++ map <C-c> :AddCppClass <CR>
+map <C-b> :w<CR>:!sh ~/.vimbuilder '%:p'<CR><CR>
 autocmd FileType tex map <F5> :!cp %:p:r.pdf /mnt/c/Temp && /mnt/c/Program\ Files\ \(x86\)/scripts/vimbuilderBridge.exe %:r.pdf<CR><CR>
-autocmd FileType c,c++ map <F5> :VBGstartGDB %:r <CR>
-autocmd FileType c,c++ map <C-F5> :VBGkill <CR>
-autocmd FileType c,c++ map <F6> :VBGcontinue <CR>
-autocmd FileType c,c++ map <F9> :VBGtoggleBreakpointThisLine <CR>
-autocmd FileType c,c++ map <F10> :VBGstepOver <CR>
-autocmd FileType c,c++ map <F11> :VBGstepIn <CR>
-autocmd FileType c,c++ map <C-e> :VBGevalWordUnderCursor<CR>
+autocmd FileType c,cpp map <F5> :VBGstartGDB %:r <CR>
+autocmd FileType c,cpp map <C-F5> :VBGkill <CR>
+autocmd FileType c,cpp map <F6> :VBGcontinue <CR>
+autocmd FileType c,cpp map <F9> :VBGtoggleBreakpointThisLine <CR>
+autocmd FileType c,cpp map <F10> :VBGstepOver <CR>
+autocmd FileType c,cpp map <F11> :VBGstepIn <CR>
+autocmd FileType c,cpp map <C-e> :VBGevalWordUnderCursor<CR>
 map <F12> :sp <CR>:exec("tag ".expand("<cword>"))<CR>
