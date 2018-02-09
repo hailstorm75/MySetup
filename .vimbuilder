@@ -8,8 +8,22 @@ case "$EXT" in
   gcc "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
   ;;
 "cpp" | "CPP")
-  echo vimbuilder: Compiling...
-  g++ "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
+  if [ -f Makefile ]
+  then
+    echo vimbuilder: Executing Makefile
+    make && echo vimbuilder: Done
+  elif [ -f CMakeLists.txt ]
+  then
+    echo vimbuilder: Makefile not found. Generating...
+    cmake $PWD
+
+    echo vimbuilder: Executing MakeFile
+    make && echo vimbuilder: Done
+  else
+    echo vimbuilder: Makefile not found. Can\'t generate.
+    echo vimbuilder: Compiling single file [$basename]...
+    g++ "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
+  fi
   ;;
 "tex")
   echo vimbuilder: Compiling...
@@ -20,3 +34,5 @@ case "$EXT" in
   exit 1
   ;;
 esac
+
+sleep .5
