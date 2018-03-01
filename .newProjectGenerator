@@ -10,7 +10,8 @@ function getProjType()
   echo $PROGNAME "Project types:"
   echo "  1. cpp"
   echo "  2. c"
-  echo "  3. tex"
+  echo "  3. asm"
+  echo "  4. tex"
 
   echo -n $PROGNAME "Number: "
   read __input
@@ -83,8 +84,7 @@ function generateFile()
     echo $PROGNAME "Error: invalid template number. Exiting..."
     exit 1
   fi
-
-
+  
   mkdir $PWD/"$PROJNAME" 2>/dev/null
   if [ $? -eq 0 ]
   then
@@ -94,6 +94,13 @@ function generateFile()
     echo $PROGNAME "Error: failed to create directory, permission denied. Exiting..."
     exit 2
   fi
+}
+
+function generateCMakeConfig()
+{
+  touch $PWD/"$PROJNAME"/"CMakeLists.txt"
+  cat ~/.templates/CMakeDebug > $PWD/"$PROJNAME"/"CMakeLists.txt"
+  sed -i "s@PROJECTNAME@$PROJNAME@g" $PWD/"$PROJNAME"/"CMakeLists.txt"
 }
 
 case "$#" in
@@ -126,11 +133,15 @@ esac
 case "$PROJTYPE" in
 1)
   generateFile "Cpp" "cpp"
+  generateCMakeConfig
   ;;
 2)
   generateFile "C" "c"
   ;;
 3)
+  generateFile "Asm" "asm"
+  ;;
+4)
   generateFile "Tex" "tex"
   ;;
 esac
