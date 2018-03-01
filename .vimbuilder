@@ -25,6 +25,12 @@ case "$EXT" in
     g++ "$1" -Wall -pedantic -g -o $(basename "$1" | cut -d. -f1) && echo vimbuilder: Done
   fi
   ;;
+"asm")
+  echo vimbuilder: Compiling...
+  nasm -felf64 "$1" -o $(basename "$1" | cut -d. -f1).o
+  ld -o $(basename "$1" | cut -d. -f1) $(basename "$1" | cut -d. -f1).o
+  chmod u+x $(basename "$1" | cut -d. -f1)
+  ;;
 "tex")
   echo vimbuilder: Compiling...
   pdflatex "$1" && echo vimbuilder: Done
